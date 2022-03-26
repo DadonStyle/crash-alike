@@ -1,15 +1,20 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
+import { useDispatch, useSelector } from 'react-redux'
+import { setJwtToken } from '../../redux/actions/connectionAction'
+import axios from 'axios';
 
 const WebSocketDemo = () => {
+  // const axios = Axios.create({ baseURL }); this is the option to get instance with already part url inside
+  const dispatch = useDispatch()
+  const jwtToken = useSelector(state => state.jwtToken)
   //Public API that will echo messages sent to it back to the client
   const [socketUrl, setSocketUrl] = useState('ws://147.182.239.36:8080/bomb');
-  const [messageHistory, setMessageHistory] = useState([]);
 
   const {
     // sendMessage,
     // lastMessage,
-    // readyState,
+    readyState,
   } = useWebSocket(socketUrl);
 
   // useEffect(() => {
@@ -20,8 +25,16 @@ const WebSocketDemo = () => {
 
   const handleClickChangeSocketUrl = useCallback(() => setSocketUrl('ws://147.182.239.36:8080/bomb'), []);
 
-  // const handleClickSendMessage = useCallback(() =>
-  //   sendMessage('Hello'), []);
+  const handleLogin = useCallback(async () => {
+    const res = await axios.post('http://147.182.239.36:8081/login', {
+      username: 'noamoni9@gmail.com',
+      password: 'NoamDadon'
+    })
+    console.log(res)
+    dispatch(setJwtToken(res))
+    return res;
+  })
+
 
   const connectionStatus = {
     [ReadyState.CONNECTING]: 'Connecting',
@@ -29,7 +42,7 @@ const WebSocketDemo = () => {
     [ReadyState.CLOSING]: 'Closing',
     [ReadyState.CLOSED]: 'Closed',
     [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
-  }; // use to be on dependency array on this obj [readyState]
+  }[readyState]; // use to be on dependency array on this obj [readyState]
 
   return (
     <div>
@@ -38,18 +51,19 @@ const WebSocketDemo = () => {
       >
         Click Me to set BOMB url
       </button>
-      {/* <button
-        onClick={handleClickSendMessage}
-        disabled={readyState !== ReadyState.OPEN}
+      <button
+        onClick={handleLogin}
+        // disabled={readyState !== ReadyState.OPEN}
       >
-        Click Me to send 'Hello'
-      </button> */}
-      <span>The WebSocket is currently {connectionStatus}</span>
+        Click Me to login
+      </button>
+      <span>The WebSocket is currently {}</span>
       {/* {lastMessage ? <span>Last message: {lastMessage.data}</span> : null} */}
-      <ul>
+      {/* <ul>
         {messageHistory
           .map((message, idx) => <span key={idx}>{message ? message.data : null}</span>)}
-      </ul>
+      </ul> */}
+      {jwtToken}
     </div>
   );
 };
