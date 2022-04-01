@@ -1,0 +1,3 @@
+1. use react bootstrap for styling purposes, and react styling components
+2. make sure to comment stuff so other devs can understand it
+3. talk to the group about how to proceed and whats the design
