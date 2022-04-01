@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
+import { Link } from "react-router-dom";
 
 const clinet = new W3CWebSocket('ws://147.182.239.36:8080/bomb')
 
@@ -11,11 +12,12 @@ const App = () => {
     }
   })
 
-
   return (
-    <>
-      <div>hellp</div>
-    </>
+    <div>
+      <Link to="/login">login</Link> | 
+      <Link to="/websocket">WebsocketConnection</Link>
+      <Link to="/register">register</Link>
+    </div>
   )
 }
 
