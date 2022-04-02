@@ -1,3 +1,5 @@
 1. use react bootstrap for styling purposes, and react styling components
 2. make sure to comment stuff so other devs can understand it
 3. talk to the group about how to proceed and whats the design
+4. why do we as for first and last name in the registrestion (continue in question 5) ?
+5. do we wanna keep the crypto principel of secrecy in our app ? (users wont need to identify themself)

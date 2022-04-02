@@ -1,42 +1,38 @@
-import React from 'react'
-// import { Button, Typography } from "@material-ui/core";
-// import axios from "axios";
+import React, { useState } from 'react'
+import Axios from "axios";
 import { Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-// import { useNavigate } from "react-router-dom";
-// import react toastify
-// import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-// import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import config from '../../config/config';
+
+const axios = Axios.create({ baseURL: config.baseUrl })
 
 const Login = () => { 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  // const [passwordShown, setPasswordShown] = useState(false);
+  const [passwordShown, setPasswordShown] = useState(false);
 
-  // const togglePasswordVisibility = () => {
-  //   setPasswordShown(passwordShown ? false : true);
-  // };
-
-  // const send = async () => {
-  //   try {
-  //     const response = await axios.post( 
-  //       "base URL" + "/login" + "/" + "user and password" // check the order
-  //     );
-  //     // notify.success("you have been successfully logged in !!!"); change to react toastify
-  //     navigate.push("/home");
-  //   } catch (err) {
-  //     // notify.error(err.response.data); change to react toastify
-  //   }
-  // }
-
-  const demo = () => {console.log("works")}
+  const sendLogin = async (formData) => {
+    try { 
+      const response = await axios.post("/login", {
+        username: formData.email,
+        password: formData.password
+      });
+      console.log(response); // we should get the jwt token from the response
+      toast.success("you have been successfully logged in");
+      navigate('/', {replace: true});
+    } catch (err) {
+      toast.error("failed to log in please try again");
+    }
+  }
 
   return (
     <div className="Login Box">
     {/* <Typography variant="h3" className="HeadLine">
       LOGIN
     </Typography> */}
-    <form onSubmit={handleSubmit(demo)}>
+    <form onSubmit={handleSubmit(sendLogin)}>
       <Form.Label>Email address</Form.Label>
       <Form.Control
         required
@@ -48,12 +44,17 @@ const Login = () => {
       <Form.Label>Password</Form.Label>
       <Form.Control
         required
-        type="password"
-        // type={passwordShown ? "text" : "password"}
+        type={passwordShown ? "text" : "password"}
         name="password"
         placeholder="Enter password"
         {...register('password', { required: true })}
       />
+      <button
+        type='button'
+        onClick={() => setPasswordShown(!passwordShown)}      
+      >
+        togglePassword
+      </button>
       <button
         variant="outlined"
         type="submit"
@@ -67,4 +68,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Login;
