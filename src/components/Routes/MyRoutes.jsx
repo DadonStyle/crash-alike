@@ -10,10 +10,11 @@ import Register from "../../modules/Register/Register";
 const MyRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/Register" element={<Register />} />
-      <Route path="/websocket" element={<WebsocketConnection />} />
+      <Route exact path="/login" element={<Login />} />
+      <Route exact path="/Register" element={<Register />} />
+      <Route exact path="/websocket" element={<WebsocketConnection />} />
+      <Route exact path="/" element={<App />} />
+      <Route path="*" element={<App />} />
     </Routes>
   );
 };

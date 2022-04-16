@@ -15,10 +15,10 @@ const Login = () => {
 
   const sendLogin = async (formData) => {
     try { 
-      const response = await axios.post("/login", {
+      const response = await axios.post("/login", JSON.parse({
         username: formData.email,
         password: formData.password
-      });
+      }));
       console.log(response); // we should get the jwt token from the response
       toast.success("you have been successfully logged in");
       navigate('/', {replace: true});

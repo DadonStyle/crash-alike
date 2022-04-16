@@ -23,10 +23,10 @@ const Register = () => {
         password: formData.password,
     });
       console.log(response); // check if this response is needed
-      toast.success("you have been successfully logged in");
+      toast.success("you have been successfully registered");
       navigate('/', {replace: true});
     } catch (err) {
-      toast.error("failed to log in please try again");
+      toast.error("failed to register please try again");
     }
   }
 
