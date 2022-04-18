@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import config from '../../config/config';
+import { errorHandler } from '../../services/errorHandler';
 
 const axios = Axios.create({ baseURL: config.baseUrl })
 
@@ -21,12 +22,15 @@ const Register = () => {
         lastName: formData.lastName,
         nick: formData.nick,
         password: formData.password,
+        // search how to make it an object
     });
       console.log(response); // check if this response is needed
       toast.success("you have been successfully registered");
       navigate('/', {replace: true});
     } catch (err) {
-      toast.error("failed to register please try again");
+      const errResponse = errorHandler(err.response.data);
+      console.log(errResponse);
+      toast.error(errResponse);
     }
   }
 

@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import config from '../../config/config';
+import { errorHandler } from '../../services/errorHandler';
 
 const axios = Axios.create({ baseURL: config.baseUrl })
 
@@ -15,15 +16,18 @@ const Login = () => {
 
   const sendLogin = async (formData) => {
     try { 
-      const response = await axios.post("/login", JSON.parse({
+      const response = await axios.post("/login", {
         username: formData.email,
         password: formData.password
-      }));
+      });
       console.log(response); // we should get the jwt token from the response
       toast.success("you have been successfully logged in");
       navigate('/', {replace: true});
     } catch (err) {
-      toast.error("failed to log in please try again");
+      console.log(err);
+      const errResponse = errorHandler(err.response.data);
+      console.log(errResponse);
+      toast.error(errResponse);
     }
   }
 

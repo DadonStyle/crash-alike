@@ -12,9 +12,9 @@ import 'react-toastify/dist/ReactToastify.css';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <MyRoutes />
-      </BrowserRouter>
+        <BrowserRouter>
+          <MyRoutes />
+        </BrowserRouter>
     </Provider>
     <ToastContainer
         position="top-center"

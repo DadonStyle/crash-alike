@@ -6,16 +6,23 @@ import App from '../../App'
 import Login from "../../modules/Login/Login";
 import WebsocketConnection from '../../modules/websocketConnection/WebsocketConnection';
 import Register from "../../modules/Register/Register";
+import S from './styledRoute';
 
 const MyRoutes = () => {
   return (
-    <Routes>
-      <Route exact path="/login" element={<Login />} />
-      <Route exact path="/Register" element={<Register />} />
-      <Route exact path="/websocket" element={<WebsocketConnection />} />
-      <Route exact path="/" element={<App />} />
-      <Route path="*" element={<App />} />
-    </Routes>
+    <S.Wrapper>
+      {/* <Header /> */}
+      <S.Main>
+        <Routes>
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/Register" element={<Register />} />
+          <Route exact path="/websocket" element={<WebsocketConnection />} />
+          <Route exact path="/" element={<App />} />
+          <Route path="*" element={<App />} />
+        </Routes>
+      </S.Main>
+      {/* <Footer /> */}
+    </S.Wrapper>
   );
 };
 
