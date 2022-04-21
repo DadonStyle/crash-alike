@@ -7,7 +7,7 @@ const Title = styled.h1`
 `;
 
 const S = {
-    Title,
-}
+  Title,
+};
 
 export default S;

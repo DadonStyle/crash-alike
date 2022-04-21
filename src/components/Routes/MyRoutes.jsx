@@ -1,14 +1,12 @@
-import {
-  Routes,
-  Route,
-} from "react-router-dom";
-import App from '../../App'
-import Login from "../../modules/Login/Login";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import App from '../../App';
+import Login from '../../modules/Login/Login';
 import WebsocketConnection from '../../modules/websocketConnection/WebsocketConnection';
-import Register from "../../modules/Register/Register";
+import Register from '../../modules/Register/Register';
 import S from './styledRoute';
 
-const MyRoutes = () => {
+function MyRoutes() {
   return (
     <S.Wrapper>
       {/* <Header /> */}
@@ -24,6 +22,6 @@ const MyRoutes = () => {
       {/* <Footer /> */}
     </S.Wrapper>
   );
-};
+}
 
 export default MyRoutes;

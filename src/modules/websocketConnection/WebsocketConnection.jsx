@@ -1,11 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-const WebsocketConnection = () => {
-
-    
-  return (
-    <div>WebsocketConnection</div>
-  )
+function WebsocketConnection() {
+  return <div>WebsocketConnection</div>;
 }
 
-export default WebsocketConnection
+export default WebsocketConnection;
