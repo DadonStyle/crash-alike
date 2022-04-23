@@ -9,7 +9,7 @@ import { errorHandler } from '../../services/errorHandler';
 
 const axios = Axios.create({ baseURL: config.baseUrl });
 
-function Login() {
+const Login = () => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const [passwordShown, setPasswordShown] = useState(false);
@@ -68,6 +68,6 @@ function Login() {
       </form>
     </div>
   );
-}
+};
 
 export default Login;

@@ -9,7 +9,7 @@ import { errorHandler } from '../../services/errorHandler';
 
 const axios = Axios.create({ baseURL: config.baseUrl });
 
-function Register() {
+const Register = () => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const [passwordShown, setPasswordShown] = useState(false);
@@ -86,6 +86,6 @@ function Register() {
       </form>
     </div>
   );
-}
+};
 
 export default Register;

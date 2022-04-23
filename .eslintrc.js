@@ -41,5 +41,7 @@ module.exports = {
     'react/jsx-wrap-multilines': 'off',
     'default-param-last': 'off',
     'prettier/prettier': ['error', { singleQuote: true }],
+    'react/prop-types': 'error',
+    'react/function-component-definition': 'off',
   },
 };

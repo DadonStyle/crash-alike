@@ -6,22 +6,20 @@ import WebsocketConnection from '../../modules/websocketConnection/WebsocketConn
 import Register from '../../modules/Register/Register';
 import S from './styledRoute';
 
-function MyRoutes() {
-  return (
-    <S.Wrapper>
-      {/* <Header /> */}
-      <S.Main>
-        <Routes>
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/Register" element={<Register />} />
-          <Route exact path="/websocket" element={<WebsocketConnection />} />
-          <Route exact path="/" element={<App />} />
-          <Route path="*" element={<App />} />
-        </Routes>
-      </S.Main>
-      {/* <Footer /> */}
-    </S.Wrapper>
-  );
-}
+const MyRoutes = () => (
+  <S.Wrapper>
+    {/* <Header /> */}
+    <S.Main>
+      <Routes>
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/Register" element={<Register />} />
+        <Route exact path="/websocket" element={<WebsocketConnection />} />
+        <Route exact path="/" element={<App />} />
+        <Route path="*" element={<App />} />
+      </Routes>
+    </S.Main>
+    {/* <Footer /> */}
+  </S.Wrapper>
+);
 
 export default MyRoutes;
