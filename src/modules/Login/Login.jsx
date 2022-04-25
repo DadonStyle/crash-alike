@@ -4,8 +4,10 @@ import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 import config from '../../config/config';
 import { errorHandler } from '../../services/errorHandler';
+import { setJwtToken } from '../../redux/actions/connectionAction';
 
 const axios = Axios.create({ baseURL: config.baseUrl });
 
@@ -13,6 +15,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const [passwordShown, setPasswordShown] = useState(false);
+  const dispatch = useDispatch();
 
   const sendLogin = async (formData) => {
     try {
@@ -20,8 +23,8 @@ const Login = () => {
         username: formData.email,
         password: formData.password,
       });
+      dispatch(setJwtToken(response.data));
       console.log(response); // we should get the jwt token from the response
-
       toast.success('you have been successfully logged in');
       navigate('/', { replace: true });
     } catch (err) {
