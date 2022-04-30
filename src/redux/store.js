@@ -1,7 +1,7 @@
 import { createStore, combineReducers } from 'redux';
-import connectionReducer from './reducers/connectionReducer';
+import { connectionReducer as connection } from './reducers/connectionReducer';
 
-const reducers = combineReducers({ connectionReducer });
+const reducers = combineReducers({ connection });
 
 export const store = createStore(
   reducers,

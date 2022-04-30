@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   jwtToken: null,
 };
 
-const connectionReducer = (state = INITIAL_STATE, action) => {
+export const connectionReducer = (state = INITIAL_STATE, action) => {
   const { type } = action;
   switch (type) {
     case JWT_TOKEN:
@@ -16,5 +16,3 @@ const connectionReducer = (state = INITIAL_STATE, action) => {
       return state;
   }
 };
-
-export default connectionReducer;
