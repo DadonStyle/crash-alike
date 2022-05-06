@@ -40,7 +40,7 @@ module.exports = {
     'react/jsx-closing-bracket-location': 'off',
     'react/jsx-wrap-multilines': 'off',
     'default-param-last': 'off',
-    'prettier/prettier': ['error', { singleQuote: true }],
+    'prettier/prettier': ['error', { singleQuote: true, endOfLine: 'auto' }],
     'react/prop-types': 'error',
     'react/function-component-definition': 'off',
   },
