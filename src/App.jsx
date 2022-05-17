@@ -15,14 +15,16 @@ const App = () => {
       `ws://147.182.239.36:8080/bomb?token=${token}` // token is currently not working ! understand how to use the useSelector
     );
     console.log('trying');
-    socket.onopen = () => {
+    socket.onopen = (msg) => {
+      console.log(msg);
       console.log('open');
     };
     socket.onerror = (error) => {
       console.log(error);
     };
 
-    socket.onmessage = function (msg) {
+    socket.onmessage = (msg) => {
+      console.log(msg);
       const data = JSON.parse(msg.data);
       try {
         console.log(data);
