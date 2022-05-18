@@ -18,7 +18,7 @@ const HeaderContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background: salmon;
+  /* background: salmon; */
 `;
 
 const LinksContainer = styled.div`

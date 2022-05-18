@@ -8,7 +8,7 @@ const AppContainer = styled.div`
   top: 0px;
   left: 0px;
   z-index: -1;
-  background-color: sandybrown;
+  /* background-color: sandybrown; */
 `;
 
 const S = {
