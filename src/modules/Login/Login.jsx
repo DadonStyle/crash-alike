@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
-import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
+// import { Input } from '@mui/material';
+import { FaEye, FaRegEyeSlash } from 'react-icons/fa';
 import config from '../../config/config';
 import { errorHandler } from '../../services/errorHandler';
 import { setJwtToken } from '../../redux/actions/connectionAction';
+import Button from '../../components/Button/Button';
+import S from './styledLogin';
 
 const axios = Axios.create({ baseURL: config.baseUrl });
 
@@ -36,40 +39,39 @@ const Login = () => {
   };
 
   return (
-    <div className="Login Box">
-      {/* <Typography variant="h3" className="HeadLine">
-      LOGIN
-    </Typography> */}
+    <S.Wrappper>
       <form onSubmit={handleSubmit(sendLogin)}>
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          required
-          type="email"
-          name="email"
-          placeholder="Enter email"
-          {...register('email', { required: true })}
-        />
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          required
-          type={passwordShown ? 'text' : 'password'}
-          name="password"
-          placeholder="Enter password"
-          {...register('password', { required: true })}
-        />
-        <button type="button" onClick={() => setPasswordShown(!passwordShown)}>
-          togglePassword
-        </button>
-        <button
-          variant="outlined"
-          type="submit"
-          className="login_button"
-          size="large"
-        >
-          login
-        </button>
+        <S.FormEmail>
+          <S.FormLabelWrapper>Email address</S.FormLabelWrapper>
+          <S.FormControlWrapper
+            required
+            type="email"
+            name="email"
+            placeholder="Enter email"
+            {...register('email', { required: true })}
+          />
+        </S.FormEmail>
+        <S.FormPassword>
+          <S.FormLabelWrapper>Password</S.FormLabelWrapper>
+          <S.FormControlWrapper
+            required
+            type={passwordShown ? 'text' : 'password'}
+            name="password"
+            placeholder="Enter password"
+            {...register('password', { required: true })}
+          />
+          {passwordShown ? (
+            <FaEye onClick={() => setPasswordShown(!passwordShown)} />
+          ) : (
+            <FaRegEyeSlash onClick={() => setPasswordShown(!passwordShown)} />
+          )}
+        </S.FormPassword>
+        <Button type="submit">Login</Button>
+        <Button onClick={() => navigate('/register', { replace: true })}>
+          Sign Up
+        </Button>
       </form>
-    </div>
+    </S.Wrappper>
   );
 };
 
