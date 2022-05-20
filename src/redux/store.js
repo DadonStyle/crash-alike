@@ -1,7 +1,8 @@
 import { createStore, combineReducers } from 'redux';
 import { connectionReducer as connection } from './reducers/connectionReducer';
+import { pageReducer as page } from './reducers/pageReducer';
 
-const reducers = combineReducers({ connection });
+const reducers = combineReducers({ connection, page });
 
 export const store = createStore(
   reducers,

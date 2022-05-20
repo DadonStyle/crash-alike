@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FaEye, FaRegEyeSlash } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 import config from '../../config/config';
+import { setIsRegister } from '../../redux/actions/pageAction';
 import { errorHandler } from '../../services/errorHandler';
 import Button from '../../components/Button/Button';
 import S from './styledRegister';
@@ -15,6 +17,7 @@ const Register = () => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const [passwordShown, setPasswordShown] = useState(false);
+  const dispatch = useDispatch();
 
   const sendRegister = async (formData) => {
     try {
@@ -33,6 +36,12 @@ const Register = () => {
       toast.error(errResponse);
     }
   };
+
+  useEffect(() => {
+    dispatch(setIsRegister(true));
+
+    return () => dispatch(setIsRegister(false));
+  }, [dispatch]);
 
   return (
     <S.Wrappper>
@@ -74,7 +83,6 @@ const Register = () => {
             <FaRegEyeSlash onClick={() => setPasswordShown(!passwordShown)} />
           )}
         </S.FormPassword>
-
         <Button type="submit">Register</Button>
       </form>
     </S.Wrappper>

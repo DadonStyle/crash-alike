@@ -1,21 +1,21 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import App from '../../App';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from '../../modules/Login/Login';
-import WebsocketConnection from '../../modules/websocketConnection/WebsocketConnection';
 import Register from '../../modules/Register/Register';
-// import S from './styledRoute';
+import Header from '../../modules/Header/Header';
+import Rooms from '../../modules/Rooms/Rooms';
 
 const MyRoutes = () => (
-  <div>
+  <Router>
+    <Header />
     <Routes>
       <Route exact path="/" element={<Login />} />
-      <Route exact path="/Register" element={<Register />} />
-      <Route exact path="/websocket" element={<WebsocketConnection />} />
-      <Route exact path="/home" element={<App />} />
+      <Route exact path="/login" element={<Login />} />
+      <Route exact path="/register" element={<Register />} />
+      <Route exact path="/rooms" element={<Rooms />} />
       <Route path="*" element={<Login />} />
     </Routes>
-  </div>
+  </Router>
 );
 
 export default MyRoutes;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,7 @@ import { FaEye, FaRegEyeSlash } from 'react-icons/fa';
 import config from '../../config/config';
 import { errorHandler } from '../../services/errorHandler';
 import { setJwtToken } from '../../redux/actions/connectionAction';
+import { setIsLogin } from '../../redux/actions/pageAction';
 import Button from '../../components/Button/Button';
 import S from './styledLogin';
 
@@ -29,7 +30,7 @@ const Login = () => {
       dispatch(setJwtToken(response.data));
       console.log(response); // we should get the jwt token from the response
       toast.success('you have been successfully logged in');
-      navigate('/', { replace: true });
+      navigate('/rooms', { replace: true });
     } catch (err) {
       console.log(err);
       const errResponse = errorHandler(err.response.data);
@@ -37,6 +38,12 @@ const Login = () => {
       toast.error(errResponse);
     }
   };
+
+  useEffect(() => {
+    dispatch(setIsLogin(true));
+
+    return () => dispatch(setIsLogin(false));
+  }, [dispatch]);
 
   return (
     <S.Wrappper>

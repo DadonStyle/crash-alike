@@ -2,18 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { store } from './redux/store';
-import MyRoutes from './components/Routes/MyRoutes';
 import 'react-toastify/dist/ReactToastify.css';
+import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <MyRoutes />
-      </BrowserRouter>
+      <App />
     </Provider>
     <ToastContainer
       position="top-center"

@@ -2,7 +2,7 @@ module.exports = {
   extends: ['plugin:react/recommended', 'prettier', 'airbnb'],
   plugins: ['react', 'react-hooks', 'prettier'],
   rules: {
-    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/exhaustive-deps': 'error',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'linebreak-style': 0,
     'react/display-name': 'off',

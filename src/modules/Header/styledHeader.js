@@ -6,19 +6,26 @@ const StyledLink = styled(Link)`
   padding-right: 2rem;
 `;
 
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
-  align-self: flex-start;
-`;
+// const Title = styled.h1`
+//   font-size: 1.5em;
+//   text-align: center;
+//   color: palevioletred;
+//   align-self: flex-start;
+// `;
 
 const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  /* background: salmon; */
+  margin-top: ${({ theme }) =>
+    theme.isLogin || theme.isRegister ? '13.5rem' : '0.5rem'};
+  &::before {
+    content: 'Crypto Tower';
+    font-size: 8rem;
+    font-weight: 100;
+    font-style: normal;
+  }
 `;
 
 const LinksContainer = styled.div`
@@ -27,7 +34,6 @@ const LinksContainer = styled.div`
 `;
 
 const S = {
-  Title,
   StyledLink,
   HeaderContainer,
   LinksContainer,

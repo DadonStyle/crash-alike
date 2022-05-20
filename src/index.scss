@@ -38,9 +38,7 @@ $bg-height: 50px;
 }
 
 /* Main styles */
-body {
-  margin-top: 13.5rem;
-  
+body {  
   color: #999;
   font: 400 16px/1.5 exo, ubuntu, "segoe ui", helvetica, arial, sans-serif;
   text-align: center;
@@ -55,12 +53,4 @@ body {
   -moz-animation-timing-function:    linear;
   -o-animation-timing-function:      linear;
   animation-timing-function:         linear;
-  
-  &::before {
-    content: "Crypto Tower";
-
-    font-size: 8rem;
-    font-weight: 100;
-    font-style: normal;
-  }
 }

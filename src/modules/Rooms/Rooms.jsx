@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import Card from '../../components/Card/Card';
 import ThreeDotLoaderMoving from '../../components/ThreeDotsLoader/ThreeDotsLoader';
+import S from './styledRooms';
 
-const WebsocketConnection = () => {
+const Rooms = () => {
   // eslint-disable-next-line no-unused-vars
   const [isOpen, setIsOpen] = useState(false);
   const token = useSelector((state) => state.connection.jwtToken);
@@ -34,13 +36,19 @@ const WebsocketConnection = () => {
       }
       return () => socket.close();
     };
-  }, []);
+  }, [token]);
 
   if (!isOpen) {
     return <ThreeDotLoaderMoving />;
   }
 
-  return <div>WebsocketConnection</div>;
+  return (
+    <S.Wrappper>
+      <Card roundPrice="30$" numOfPlayers="4" />
+      <Card roundPrice="30$" numOfPlayers="2" />
+      <Card roundPrice="30$" numOfPlayers="7" />
+    </S.Wrappper>
+  );
 };
 
-export default WebsocketConnection;
+export default Rooms;
