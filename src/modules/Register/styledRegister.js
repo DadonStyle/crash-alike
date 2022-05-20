@@ -33,12 +33,28 @@ const FormPassword = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0rem 0rem 1rem 1rem;
-  margin-left: 3rem;
+  margin-left: 1rem;
   flex: 1;
+
+  .marginLeft {
+    margin-left: 4rem;
+  }
   svg {
     align-self: center;
     margin-right: 12px;
   }
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+  }
+`;
+
+const FormNickName = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 0rem 0rem 1rem 1rem;
+  margin-right: 3rem;
+  flex: 1;
 
   @media (max-width: 1000px) {
     flex-direction: column;
@@ -65,6 +81,7 @@ const S = {
   FormLabelWrapper,
   FormEmail,
   FormPassword,
+  FormNickName,
 };
 
 export default S;

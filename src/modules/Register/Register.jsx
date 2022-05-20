@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
-import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { FaEye, FaRegEyeSlash } from 'react-icons/fa';
 import config from '../../config/config';
 import { errorHandler } from '../../services/errorHandler';
+import Button from '../../components/Button/Button';
+import S from './styledRegister';
 
 const axios = Axios.create({ baseURL: config.baseUrl });
 
@@ -18,8 +20,6 @@ const Register = () => {
     try {
       const response = await axios.post('register', {
         email: formData.email,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
         nick: formData.nick,
         password: formData.password,
         // search how to make it an object
@@ -35,56 +35,49 @@ const Register = () => {
   };
 
   return (
-    <div className="Register Box">
+    <S.Wrappper>
       <form onSubmit={handleSubmit(sendRegister)}>
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          required
-          type="email"
-          placeholder="Enter email"
-          {...register('email', { required: true })}
-        />
-        <Form.Label>First Name</Form.Label>
-        <Form.Control
-          required
-          type="text"
-          placeholder="Enter your first name"
-          {...register('firstName', { required: true })}
-        />
-        <Form.Label>Last Name</Form.Label>
-        <Form.Control
-          required
-          type="text"
-          placeholder="Enter your last name"
-          {...register('lastName', { required: true })}
-        />
-        <Form.Label>Nickname</Form.Label>
-        <Form.Control
-          required
-          type="text"
-          placeholder="Enter your desired nickname"
-          {...register('nick', { required: true })}
-        />
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          required
-          type={passwordShown ? 'text' : 'password'}
-          placeholder="Enter password"
-          {...register('password', { required: true })}
-        />
-        <button type="button" onClick={() => setPasswordShown(!passwordShown)}>
-          togglePassword
-        </button>
-        <button
-          variant="outlined"
-          type="submit"
-          className="Register_button"
-          size="large"
-        >
-          Register
-        </button>
+        <S.FormEmail>
+          <S.FormLabelWrapper>Email address</S.FormLabelWrapper>
+          <S.FormControlWrapper
+            required
+            type="email"
+            name="email"
+            placeholder="Desired email"
+            {...register('email', { required: true })}
+          />
+        </S.FormEmail>
+
+        <S.FormNickName>
+          <S.FormLabelWrapper>Nickname</S.FormLabelWrapper>
+          <S.FormControlWrapper
+            required
+            type="text"
+            placeholder="Desired nickname"
+            {...register('nick', { required: true })}
+          />
+        </S.FormNickName>
+
+        <S.FormPassword>
+          <S.FormLabelWrapper>Password</S.FormLabelWrapper>
+          <S.FormControlWrapper
+            required
+            className="marginLeft"
+            type={passwordShown ? 'text' : 'password'}
+            name="password"
+            placeholder="Desired password"
+            {...register('password', { required: true })}
+          />
+          {passwordShown ? (
+            <FaEye onClick={() => setPasswordShown(!passwordShown)} />
+          ) : (
+            <FaRegEyeSlash onClick={() => setPasswordShown(!passwordShown)} />
+          )}
+        </S.FormPassword>
+
+        <Button type="submit">Register</Button>
       </form>
-    </div>
+    </S.Wrappper>
   );
 };
 
