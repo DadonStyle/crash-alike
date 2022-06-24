@@ -1,16 +1,16 @@
-import { JWT_TOKEN } from '../actionTypes/connectionActionType';
+import { SET_CLIENT_OBJ } from '../actionTypes/connectionActionType';
 
 const INITIAL_STATE = {
-  jwtToken: null,
+  clientObj: null,
 };
 
 export const connectionReducer = (state = INITIAL_STATE, action) => {
   const { type } = action;
   switch (type) {
-    case JWT_TOKEN:
+    case SET_CLIENT_OBJ:
       return {
         ...state,
-        jwtToken: action.payload,
+        clientObj: action.payload,
       };
     default:
       return state;

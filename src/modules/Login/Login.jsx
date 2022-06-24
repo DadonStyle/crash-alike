@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { FaEye, FaRegEyeSlash } from 'react-icons/fa';
 import config from '../../config/config';
 import { errorHandler } from '../../services/errorHandler';
-import { setJwtToken } from '../../redux/actions/connectionAction';
+import { setClientObj } from '../../redux/actions/connectionAction';
 import { setIsLogin } from '../../redux/actions/pageAction';
 import Button from '../../components/Button/Button';
 import S from './styledLogin';
@@ -27,8 +27,8 @@ const Login = () => {
         username: formData.email,
         password: formData.password,
       });
-      dispatch(setJwtToken(response.data));
-      console.log(response); // we should get the jwt token from the response
+      dispatch(setClientObj(response.data));
+      console.log(response.data); // we should get the jwt token from the response
       toast.success('you have been successfully logged in');
       navigate('/rooms', { replace: true });
     } catch (err) {

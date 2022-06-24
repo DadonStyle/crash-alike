@@ -1,6 +1,6 @@
-import { JWT_TOKEN } from '../actionTypes/connectionActionType';
+import { SET_CLIENT_OBJ } from '../actionTypes/connectionActionType';
 
-export const setJwtToken = (token) => ({
-  type: JWT_TOKEN,
-  payload: token,
+export const setClientObj = (obj) => ({
+  type: SET_CLIENT_OBJ,
+  payload: obj,
 });

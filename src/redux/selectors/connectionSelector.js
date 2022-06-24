@@ -1,3 +1,3 @@
-const jwtToken = (state) => state.connection.jwtToken;
+const clientObj = (state) => state.connection.clientObj;
 
-export default { jwtToken };
+export default { clientObj };
