@@ -20,6 +20,7 @@ const Login = () => {
   const { register, handleSubmit } = useForm();
   const [passwordShown, setPasswordShown] = useState(false);
   const dispatch = useDispatch();
+  const id = 1; // hardcoded for now
 
   const sendLogin = async (formData) => {
     try {
@@ -30,7 +31,7 @@ const Login = () => {
       dispatch(setClientObj(response.data));
       console.log(response.data); // we should get the jwt token from the response
       toast.success('you have been successfully logged in');
-      navigate('/rooms', { replace: true });
+      navigate(`/playRoom/:${id}`, { replace: true });
     } catch (err) {
       console.log(err);
       const errResponse = errorHandler(err.response.data);
