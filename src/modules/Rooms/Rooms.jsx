@@ -12,7 +12,7 @@ const Rooms = () => {
   useEffect(() => {
     // eslint-disable-next-line no-undef
     const socket = new WebSocket(
-      `ws://147.182.239.36:8080/bomb?token=${clientObj.ClientToken}` // token is currently not working ! understand how to use the useSelector
+      `ws://147.182.239.36:8080/bomb?token=${clientObj.ClientToken}`
     );
     // console.log('trying');
     socket.onopen = (msg) => {
@@ -25,7 +25,7 @@ const Rooms = () => {
     };
 
     socket.onmessage = (msg) => {
-      // console.log('onmessage', msg);
+      console.log('onmessage', msg);
       const data = JSON.parse(msg.data);
       try {
         console.log(data);
