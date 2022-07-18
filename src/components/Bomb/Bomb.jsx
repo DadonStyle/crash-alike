@@ -7,6 +7,8 @@ const Bomb = () => {
   const [intervalId, setIntervalId] = useState(0);
   const START_TIME = 2000;
 
+  const bombIsTicking = false; // will change after timer hit 0;
+
   // eslint-disable-next-line no-unused-vars
   const [timer, handleStart, handleStop, handleReset, status, seconds] =
     useTimer(START_TIME, changingSpeed);
@@ -31,10 +33,10 @@ const Bomb = () => {
   // changingSpeed
   return (
     <S.BombContainer>
-      <div>Bomb {timer}</div>
+      <div style={{ fontWeight: 700, color: 'black' }}>Bomb {timer}</div>
       <span>{}</span>
       <button type="button" onClick={handleStop}>
-        STOP
+        {bombIsTicking ? 'Hit' : 'Bet'}
       </button>
     </S.BombContainer>
   );

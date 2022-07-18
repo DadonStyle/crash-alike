@@ -7,9 +7,10 @@ const PlayRoom = () => {
 
   return (
     <S.Wrappper>
-      Chat
+      <h1>waiting room / start timer</h1>
+      Joined list
       <Bomb />
-      Times
+      Prize Pool + UI BTN
     </S.Wrappper>
   );
 };
