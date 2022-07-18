@@ -1,0 +1,17 @@
+PLAY ROOM:
+1.add players ready list
+2.add minimum players to start
+3.fix headers (changing waiting room and start with timer)
+4.add join player list (mock data for 3 than add the 3 with a btn to check if its adding and working)
+5.add connection between the start timer to the waiting room and to the hit/bet btn
+6.leaderboard component
+7.FLOW:
+ a.waiting room shows (like in the figma)
+ b.mock btn (not in the figma) that will increase the "players ready" (make sure the bet is working (mock btn can be "bet"))
+ c.after the player ready cross 10 (which is the minimum require to start) automaticly the start timer,
+  betDisabled, player ready and minimum players gone.
+ d.after the start timer is 0 start the round,
+  bet change to hit, waiting room changed to start timer, bomb start ticking (might be more)
+ e.after bomb get to 0, stop the round, show the leaderboard (mock data same player will be first all the time, 
+  just trigger the leaderboard after the bomb is 0)
+ f.reset button that will start the flow over
