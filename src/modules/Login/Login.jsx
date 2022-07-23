@@ -44,7 +44,8 @@ const Login = () => {
     dispatch(setIsLogin(true));
 
     return () => dispatch(setIsLogin(false));
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <S.Wrappper>

@@ -41,7 +41,8 @@ const Register = () => {
     dispatch(setIsRegister(true));
 
     return () => dispatch(setIsRegister(false));
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <S.Wrappper>
