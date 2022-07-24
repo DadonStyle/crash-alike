@@ -3,8 +3,9 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { connectionReducer as connection } from './reducers/connectionReducer';
 import { pageReducer as page } from './reducers/pageReducer';
+import { roomReducer as room } from './reducers/roomReducer';
 
-const reducers = combineReducers({ connection, page });
+const reducers = combineReducers({ connection, page, room });
 
 const persistConfig = {
   key: 'root',

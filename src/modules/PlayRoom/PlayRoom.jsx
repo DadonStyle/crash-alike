@@ -25,7 +25,9 @@ const PlayRoom = () => {
         <S.MainHeader>Waiting room / start timer</S.MainHeader>
         <S.PlayersWrapper>
           <S.MiniHeader>Players ready: 5</S.MiniHeader>
-          <S.MiniHeader>Minimum players to start: 10</S.MiniHeader>
+          <S.MiniHeader style={{ marginTop: '-20px' }}>
+            Minimum players to start: 10
+          </S.MiniHeader>
         </S.PlayersWrapper>
         <Bomb />
       </S.BombWrapper>

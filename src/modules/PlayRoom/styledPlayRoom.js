@@ -49,7 +49,6 @@ const PlayersWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2px;
 `;
 
 const MainHeader = styled.h1`
