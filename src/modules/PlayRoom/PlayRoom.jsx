@@ -4,6 +4,7 @@ import Bomb from '../../components/Bomb/Bomb';
 import { setIsLogin, setIsRegister } from '../../redux/actions/pageAction';
 import pageSelector from '../../redux/selectors/pageSelector';
 import S from './styledPlayRoom';
+import userSVG from '../../assets/user.svg';
 
 const PlayRoom = () => {
   const dispatch = useDispatch();
@@ -18,9 +19,23 @@ const PlayRoom = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const JoinedList = [
+    { icon: userSVG, name: 'Moshe' },
+    { icon: userSVG, name: 'Omer' },
+    { icon: userSVG, name: 'Karin' },
+  ];
+
   return (
     <S.Wrappper>
-      <S.ListWrapper>Joined list</S.ListWrapper>
+      <S.ListWrapper>
+        <h1>Joined:</h1>
+        {JoinedList.map((item) => (
+          <div>
+            <img src={item.icon} alt="" />
+            {item.name}
+          </div>
+        ))}
+      </S.ListWrapper>
       <S.BombWrapper>
         <S.MainHeader>Waiting room / start timer</S.MainHeader>
         <S.PlayersWrapper>
