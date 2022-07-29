@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Bomb from '../../components/Bomb/Bomb';
 import { setIsLogin, setIsRegister } from '../../redux/actions/pageAction';
@@ -11,6 +11,8 @@ const PlayRoom = () => {
   const isLogin = useSelector(pageSelector.isLogin);
   const isRegister = useSelector(pageSelector.isRegister);
 
+  const [JoinedList, setJoinedList] = useState([]);
+
   useEffect(() => {
     if (isLogin || isRegister) {
       dispatch(setIsLogin(false));
@@ -19,29 +21,31 @@ const PlayRoom = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const JoinedList = [
-    { icon: userSVG, name: 'Moshe' },
-    { icon: userSVG, name: 'Omer' },
-    { icon: userSVG, name: 'Karin' },
-  ];
+  const MockUserCreator = (name) => {
+    setJoinedList([...JoinedList, { icon: userSVG, name }]);
+  };
 
   return (
     <S.Wrappper>
       <S.ListWrapper>
-        <h1>Joined:</h1>
-        {JoinedList.map((item) => (
-          <div>
-            <img src={item.icon} alt="" />
-            {item.name}
-          </div>
-        ))}
+        <S.ListHeader>Joined:</S.ListHeader>
+        {JoinedList &&
+          JoinedList.map((item) => (
+            <S.UserWrapper>
+              <img src={item.icon} alt="" />
+              {item.name}
+            </S.UserWrapper>
+          ))}
       </S.ListWrapper>
       <S.BombWrapper>
         <S.MainHeader>Waiting room / start timer</S.MainHeader>
         <S.PlayersWrapper>
-          <S.MiniHeader>Players ready: 5</S.MiniHeader>
+          <S.MiniHeader>Players ready: {JoinedList.length}</S.MiniHeader>
           <S.MiniHeader style={{ marginTop: '-20px' }}>
-            Minimum players to start: 10
+            Minimum players to start: 5
+            <button type="submit" onClick={() => MockUserCreator('Dan')}>
+              Add User
+            </button>
           </S.MiniHeader>
         </S.PlayersWrapper>
         <Bomb />
