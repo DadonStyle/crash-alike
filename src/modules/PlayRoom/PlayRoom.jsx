@@ -12,6 +12,9 @@ const PlayRoom = () => {
   const isRegister = useSelector(pageSelector.isRegister);
 
   const [JoinedList, setJoinedList] = useState([]);
+  const [ReadyList, setReadyList] = useState([]);
+  const [isStartTick, setIsStartTick] = useState(false);
+  const [isStopTick, setIsStopTick] = useState(false);
 
   useEffect(() => {
     if (isLogin || isRegister) {
@@ -23,6 +26,7 @@ const PlayRoom = () => {
 
   const MockUserCreator = (name) => {
     setJoinedList([...JoinedList, { icon: userSVG, name }]);
+    setReadyList([...JoinedList, { icon: userSVG, name }]);
   };
 
   return (
@@ -38,7 +42,11 @@ const PlayRoom = () => {
           ))}
       </S.ListWrapper>
       <S.BombWrapper>
-        <S.MainHeader>Waiting room / start timer</S.MainHeader>
+        {ReadyList.length >= 5 ? (
+          <S.MainHeader>Start in 'timer'</S.MainHeader>
+        ) : (
+          <S.MainHeader>Waiting room</S.MainHeader>
+        )}
         <S.PlayersWrapper>
           <S.MiniHeader>Players ready: {JoinedList.length}</S.MiniHeader>
           <S.MiniHeader style={{ marginTop: '-20px' }}>
@@ -48,7 +56,16 @@ const PlayRoom = () => {
             </button>
           </S.MiniHeader>
         </S.PlayersWrapper>
-        <Bomb />
+        <Bomb startTime={2000} isStart={isStartTick} isStopped={isStopTick} />
+        {ReadyList.length >= 5 ? (
+          <button type="submit" onClick={() => setIsStopTick(true)}>
+            Hit
+          </button>
+        ) : (
+          <button type="submit" onClick={() => setIsStartTick(true)}>
+            Bet
+          </button>
+        )}
       </S.BombWrapper>
       <S.ButtnWrapper>Prize Pool + UI BTN</S.ButtnWrapper>
     </S.Wrappper>
