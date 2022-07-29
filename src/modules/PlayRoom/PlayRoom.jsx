@@ -1,33 +1,70 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Bomb from '../../components/Bomb/Bomb';
 import { setIsLogin, setIsRegister } from '../../redux/actions/pageAction';
 import pageSelector from '../../redux/selectors/pageSelector';
 import S from './styledPlayRoom';
 import userSVG from '../../assets/user.svg';
+import useTimer from '../../hooks/useTimer';
 
 const PlayRoom = () => {
   const dispatch = useDispatch();
   const isLogin = useSelector(pageSelector.isLogin);
   const isRegister = useSelector(pageSelector.isRegister);
+  const startTime = 100; // 10 sec
 
+  const [
+    timer,
+    handleStart,
+    handleStop,
+    // eslint-disable-next-line no-unused-vars
+    handleReset,
+    status,
+    seconds,
+    miliSeconds,
+  ] = useTimer(startTime, 10, true);
+
+  // users
   const [JoinedList, setJoinedList] = useState([]);
   const [ReadyList, setReadyList] = useState([]);
-  const [isStartTick, setIsStartTick] = useState(false);
-  const [isStopTick, setIsStopTick] = useState(false);
+  const [isHit, setIsHit] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [hitTime, setHitTime] = useState(0);
+  // bomb timer
+  const [isTicking, setIsTicking] = useState(false);
+  // round
 
   useEffect(() => {
     if (isLogin || isRegister) {
       dispatch(setIsLogin(false));
       dispatch(setIsRegister(false));
+      // not sure if this gets here (need server to check)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (ReadyList.length >= 5 && status === 'not started') {
+      handleStart();
+    }
+
+    if (parseFloat(miliSeconds, 10) === 0 && parseFloat(seconds, 10) === 0 && status === 'started') {
+      handleStop();
+      setIsTicking(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ReadyList.length, isTicking, miliSeconds, seconds]);
 
   const MockUserCreator = (name) => {
     setJoinedList([...JoinedList, { icon: userSVG, name }]);
     setReadyList([...JoinedList, { icon: userSVG, name }]);
   };
+
+  const handleBet = useCallback(() => console.log('bet'), []);
+  const handleHit = useCallback(() => {
+    setIsHit(true);
+    console.log('hit');
+  }, []);
 
   return (
     <S.Wrappper>
@@ -43,7 +80,7 @@ const PlayRoom = () => {
       </S.ListWrapper>
       <S.BombWrapper>
         {ReadyList.length >= 5 ? (
-          <S.MainHeader>Start in 'timer'</S.MainHeader>
+          <S.MainHeader>Start in {timer}</S.MainHeader>
         ) : (
           <S.MainHeader>Waiting room</S.MainHeader>
         )}
@@ -56,13 +93,18 @@ const PlayRoom = () => {
             </button>
           </S.MiniHeader>
         </S.PlayersWrapper>
-        <Bomb startTime={2000} isStart={isStartTick} isStopped={isStopTick} />
-        {ReadyList.length >= 5 ? (
-          <button type="submit" onClick={() => setIsStopTick(true)}>
+        <Bomb
+          startTime={2000}
+          isBombTick={isTicking}
+          setHitTime={setHitTime}
+          isHit={isHit}
+        />
+        {isTicking ? (
+          <button type="submit" onClick={handleHit} disabled={isHit}>
             Hit
           </button>
         ) : (
-          <button type="submit" onClick={() => setIsStartTick(true)}>
+          <button type="submit" onClick={handleBet}>
             Bet
           </button>
         )}

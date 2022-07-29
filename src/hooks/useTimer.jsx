@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
-import { twoDigits } from '../services/utillService';
+import React, { useMemo, useState } from 'react';
+import { twoDigits, oneDigits } from '../services/utillService';
 import useInterval from './useInterval';
 
 const STATUS = {
-  STARTED: 'Started',
-  STOPPED: 'Stopped',
+  NOT_STARTED: 'not started',
+  STARTED: 'started',
+  STOPPED: 'stopped',
+  EXPLODED: 'exploded',
 };
 
-const useTimer = (totalSeconds, intervalSpeed = 10) => {
+const useTimer = (totalSeconds, intervalSpeed = 10, isOneDigit = false) => {
   const INITIAL_COUNT = totalSeconds;
   const [secondsRemaining, setSecondsRemaining] = useState(totalSeconds);
   // eslint-disable-next-line no-unused-vars
-  const [status, setStatus] = useState(STATUS.STOPPED);
+  const [status, setStatus] = useState(STATUS.NOT_STARTED);
 
   const millisecontsDisplay = secondsRemaining % 100;
   const secondsCalc = (secondsRemaining - millisecontsDisplay) / 100;
@@ -27,7 +29,7 @@ const useTimer = (totalSeconds, intervalSpeed = 10) => {
     setStatus(STATUS.STOPPED);
   };
   const handleReset = () => {
-    setStatus(STATUS.STOPPED);
+    setStatus(STATUS.NOT_STARTED);
     setSecondsRemaining(INITIAL_COUNT);
   };
 
@@ -36,23 +38,43 @@ const useTimer = (totalSeconds, intervalSpeed = 10) => {
       if (secondsRemaining > 0) {
         setSecondsRemaining(secondsRemaining - 1);
       } else {
-        setStatus(STATUS.STOPPED);
+        setStatus(STATUS.EXPLODED);
       }
     },
     // passing null stops the interval
     status === STATUS.STARTED ? intervalSpeed : null
   );
 
-  const seconds = twoDigits(secondsToDisplay);
+  const seconds = useMemo(
+    () => twoDigits(secondsToDisplay),
+    [secondsToDisplay]
+  );
 
-  const timer = (
+  const miliSeconds = useMemo(
+    () => twoDigits(millisecontsDisplay),
+    [millisecontsDisplay]
+  );
+
+  const timer = !isOneDigit ? (
     <div style={{ padding: 20 }}>
       {twoDigits(minutesToDisplay)}:{twoDigits(secondsToDisplay)}:
       {secondsRemaining.toString().slice(-2)}
     </div>
+  ) : (
+    <div style={{ padding: 20 }}>
+      {secondsToDisplay}:{oneDigits(secondsRemaining.toString().slice(-2))}
+    </div>
   );
 
-  return [timer, handleStart, handleStop, handleReset, status, seconds];
+  return [
+    timer,
+    handleStart,
+    handleStop,
+    handleReset,
+    status,
+    seconds,
+    miliSeconds,
+  ];
 };
 
 export default useTimer;

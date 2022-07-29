@@ -42,6 +42,9 @@ const PlayersWrapper = styled.div`
 
 const MainHeader = styled.h1`
   color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const MiniHeader = styled.h3`
