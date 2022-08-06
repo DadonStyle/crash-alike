@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { twoDigits, oneDigits } from '../services/utillService';
 import useInterval from './useInterval';
 
@@ -33,12 +33,18 @@ const useTimer = (totalSeconds, intervalSpeed = 10, isOneDigit = false) => {
     setSecondsRemaining(INITIAL_COUNT);
   };
 
+  useEffect(() => {
+    if (secondsRemaining === 0) {
+      setStatus(STATUS.EXPLODED);
+    }
+  }, [secondsRemaining]);
+
   useInterval(
     () => {
       if (secondsRemaining > 0) {
         setSecondsRemaining(secondsRemaining - 1);
       } else {
-        setStatus(STATUS.EXPLODED);
+        setSecondsRemaining(0);
       }
     },
     // passing null stops the interval

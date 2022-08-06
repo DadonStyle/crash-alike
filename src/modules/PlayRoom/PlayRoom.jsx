@@ -2,16 +2,20 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Bomb from '../../components/Bomb/Bomb';
 import { setIsLogin, setIsRegister } from '../../redux/actions/pageAction';
+import { setIsRoundOver } from '../../redux/actions/roomAction';
 import pageSelector from '../../redux/selectors/pageSelector';
 import S from './styledPlayRoom';
 import userSVG from '../../assets/user.svg';
 import useTimer from '../../hooks/useTimer';
+import roomSelector from '../../redux/selectors/roomSelector';
 
 const PlayRoom = () => {
   const dispatch = useDispatch();
   const isLogin = useSelector(pageSelector.isLogin);
   const isRegister = useSelector(pageSelector.isRegister);
-  const startTime = 100; // 10 sec
+  const isRoundOver = useSelector(roomSelector.isRoundOver);
+
+  const startTime = 1000; // 10 sec
 
   const [
     timer,
@@ -45,6 +49,7 @@ const PlayRoom = () => {
 
   useEffect(() => {
     if (ReadyList.length >= 5 && status === 'not started') {
+      dispatch(setIsRoundOver(false));
       handleStart();
     }
 
@@ -100,7 +105,7 @@ const PlayRoom = () => {
           isHit={isHit}
         />
         {isTicking ? (
-          <button type="submit" onClick={handleHit} disabled={isHit}>
+          <button type="submit" onClick={handleHit} disabled={isHit || isRoundOver}>
             Hit
           </button>
         ) : (

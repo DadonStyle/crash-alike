@@ -1,11 +1,11 @@
 import {
-  IS_COUNT_DOWN,
+  IS_ROUND_OVER,
   IS_WAITING_ROOM,
   IS_GAME_STARTED,
 } from '../actionTypes/roomActionType';
 
-export const setIsCountDown = (bool) => ({
-  type: IS_COUNT_DOWN,
+export const setIsRoundOver = (bool) => ({
+  type: IS_ROUND_OVER,
   payload: bool,
 });
 

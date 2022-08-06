@@ -1,11 +1,11 @@
 import {
-  IS_COUNT_DOWN,
+  IS_ROUND_OVER,
   IS_WAITING_ROOM,
   IS_GAME_STARTED,
 } from '../actionTypes/roomActionType';
 
 const INITIAL_STATE = {
-  isCountDown: false,
+  isRoundOver: false,
   isWaitingRoom: false,
   isGameStarted: false,
 };
@@ -13,10 +13,10 @@ const INITIAL_STATE = {
 export const roomReducer = (state = INITIAL_STATE, action) => {
   const { type } = action;
   switch (type) {
-    case IS_COUNT_DOWN:
+    case IS_ROUND_OVER:
       return {
         ...state,
-        isCountDown: action.payload,
+        isRoundOver: action.payload,
       };
     case IS_WAITING_ROOM:
       return {

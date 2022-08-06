@@ -1,3 +1,3 @@
-export const IS_COUNT_DOWN = 'IS_COUNT_DOWN';
+export const IS_ROUND_OVER = 'IS_ROUND_OVER';
 export const IS_WAITING_ROOM = 'IS_WAITING_ROOM';
 export const IS_GAME_STARTED = 'IS_GAME_STARTED';
