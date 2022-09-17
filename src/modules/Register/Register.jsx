@@ -22,10 +22,11 @@ const Register = () => {
   const sendRegister = async (formData) => {
     try {
       const response = await axios.post('register', {
+        firstName: 'mock',
+        lastName: 'mock',
         email: formData.email,
         nick: formData.nick,
-        password: formData.password,
-        // search how to make it an object
+        password: formData.password
       });
       console.log(response); // check if this response is needed
       toast.success('you have been successfully registered');

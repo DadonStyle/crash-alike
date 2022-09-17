@@ -33,9 +33,10 @@ const Login = () => {
       toast.success('you have been successfully logged in');
       navigate(`/playRoom/:${id}`, { replace: true });
     } catch (err) {
-      console.log(err);
+      console.log('raw err', err.response);
+      console.log('raw err', err.response.data);
       const errResponse = errorHandler(err.response.data);
-      console.log(errResponse);
+      console.log('errResponse', errResponse);
       toast.error(errResponse);
     }
   };
@@ -57,6 +58,7 @@ const Login = () => {
             type="email"
             name="email"
             placeholder="Enter email"
+            className="right12"
             {...register('email', { required: true })}
           />
         </S.FormEmail>
