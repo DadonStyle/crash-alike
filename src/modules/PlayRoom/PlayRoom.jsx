@@ -8,6 +8,7 @@ import S from './styledPlayRoom';
 import userSVG from '../../assets/user.svg';
 import useTimer from '../../hooks/useTimer';
 import roomSelector from '../../redux/selectors/roomSelector';
+import connectionSelector from '../../redux/selectors/connectionSelector';
 
 const PlayRoom = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,38 @@ const PlayRoom = () => {
   const [isTicking, setIsTicking] = useState(false);
   // round
 
+  // eslint-disable-next-line no-unused-vars
+  const [isOpen, setIsOpen] = useState(false);
+  const clientObj = useSelector(connectionSelector.clientObj);
+
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    const socket = new WebSocket(
+      `ws://157.245.139.199:8080/bomb?token=${clientObj.ClientToken}`
+    );
+    // console.log('trying');
+    socket.onopen = () => {
+      // console.log('onopen', msg);
+      setIsOpen(true);
+    };
+    socket.onerror = (error) => {
+      console.log('onerror', error);
+      setIsOpen(false);
+    };
+
+    socket.onmessage = (msg) => {
+      console.log('onmessage', msg);
+      const data = JSON.parse(msg.data);
+      try {
+        console.log(data);
+      } catch (err) {
+        // whatever you wish to do with the err
+        console.log(err);
+      }
+      return () => socket.close();
+    };
+  }, [clientObj]);
+
   useEffect(() => {
     if (isLogin || isRegister) {
       dispatch(setIsLogin(false));
@@ -61,8 +94,9 @@ const PlayRoom = () => {
   }, [ReadyList.length, isTicking, miliSeconds, seconds]);
 
   const MockUserCreator = (name) => {
-    setJoinedList([...JoinedList, { icon: userSVG, name }]);
-    setReadyList([...JoinedList, { icon: userSVG, name }]);
+    const newUser = { icon: userSVG, name, id: Math.random() };
+    setJoinedList([...JoinedList, newUser]);
+    setReadyList([...JoinedList, newUser]);
   };
 
   const handleBet = useCallback(() => console.log('bet'), []);
@@ -77,7 +111,7 @@ const PlayRoom = () => {
         <S.ListHeader>Joined:</S.ListHeader>
         {JoinedList &&
           JoinedList.map((item) => (
-            <S.UserWrapper>
+            <S.UserWrapper key={item.id}>
               <img src={item.icon} alt="" />
               {item.name}
             </S.UserWrapper>

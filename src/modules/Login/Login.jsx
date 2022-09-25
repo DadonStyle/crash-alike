@@ -29,14 +29,11 @@ const Login = () => {
         password: formData.password,
       });
       dispatch(setClientObj(response.data));
-      console.log(response.data); // we should get the jwt token from the response
       toast.success('you have been successfully logged in');
       navigate(`/playRoom/:${id}`, { replace: true });
     } catch (err) {
-      console.log('raw err', err.response);
       console.log('raw err', err.response.data);
       const errResponse = errorHandler(err.response.data);
-      console.log('errResponse', errResponse);
       toast.error(errResponse);
     }
   };

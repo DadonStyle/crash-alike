@@ -9,9 +9,9 @@ const Header = () => {
   return (
     <S.HeaderContainer>
       <S.LinksContainer>
-        {/* <S.StyledLink to="/login">login</S.StyledLink>
+        <S.StyledLink to="/login">login</S.StyledLink>
         <S.StyledLink to="/websocket">WebsocketConnection</S.StyledLink>
-        <S.StyledLink to="/register">register</S.StyledLink> */}
+        <S.StyledLink to="/register">register</S.StyledLink>
       </S.LinksContainer>
     </S.HeaderContainer>
   );

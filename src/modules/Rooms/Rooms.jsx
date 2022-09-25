@@ -9,6 +9,7 @@ const Rooms = () => {
   // eslint-disable-next-line no-unused-vars
   const [isOpen, setIsOpen] = useState(false);
   const clientObj = useSelector(connectionSelector.clientObj);
+
   useEffect(() => {
     // eslint-disable-next-line no-undef
     const socket = new WebSocket(
