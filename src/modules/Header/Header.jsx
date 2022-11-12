@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
-import S from './styledHeader';
+import S from './styled';
 
 const Header = () => {
   // eslint-disable-next-line no-unused-vars

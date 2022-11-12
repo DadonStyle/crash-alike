@@ -9,7 +9,7 @@ import config from '../../config/config';
 import { setIsRegister } from '../../redux/actions/pageAction';
 import { errorHandler } from '../../services/errorHandler';
 import Button from '../../components/Button/Button';
-import S from './styledRegister';
+import S from './styled';
 
 const axios = Axios.create({ baseURL: config.baseUrl });
 

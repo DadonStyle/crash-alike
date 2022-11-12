@@ -11,7 +11,7 @@ import { errorHandler } from '../../services/errorHandler';
 import { setClientObj } from '../../redux/actions/connectionAction';
 import { setIsLogin } from '../../redux/actions/pageAction';
 import Button from '../../components/Button/Button';
-import S from './styledLogin';
+import S from './styled';
 
 const axios = Axios.create({ baseURL: config.baseUrl });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import S from './styledCard';
+import S from './styled';
 
 const Card = (
   // eslint-disable-next-line react/prop-types

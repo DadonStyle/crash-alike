@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { setIsRoundOver } from '../../redux/actions/roomAction';
-import S from './bombStyled';
+import S from './styled';
 import useTimer from '../../hooks/useTimer';
 
 const Bomb = ({ startTime, isBombTick = false, setHitTime, isHit = false }) => {

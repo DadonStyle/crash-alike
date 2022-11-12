@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Card from '../../components/Card/Card';
 import ThreeDotLoaderMoving from '../../components/ThreeDotsLoader/ThreeDotsLoader';
 import connectionSelector from '../../redux/selectors/connectionSelector';
-import S from './styledRooms';
+import S from './styled';
 
 const Rooms = () => {
   // eslint-disable-next-line no-unused-vars

@@ -4,7 +4,7 @@ import Bomb from '../../components/Bomb/Bomb';
 import { setIsLogin, setIsRegister } from '../../redux/actions/pageAction';
 import { setIsRoundOver } from '../../redux/actions/roomAction';
 import pageSelector from '../../redux/selectors/pageSelector';
-import S from './styledPlayRoom';
+import S from './styled';
 import userSVG from '../../assets/user.svg';
 import useTimer from '../../hooks/useTimer';
 import roomSelector from '../../redux/selectors/roomSelector';
