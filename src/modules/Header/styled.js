@@ -3,15 +3,18 @@ import { Link } from 'react-router-dom';
 
 const StyledLink = styled(Link)`
   margin: auto;
-  padding-right: 2rem;
-`;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  text-decoration: none;
+  height: 90px;
+  color: #E8E6E3;
 
-// const Title = styled.h1`
-//   font-size: 1.5em;
-//   text-align: center;
-//   color: palevioletred;
-//   align-self: flex-start;
-// `;
+  :hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`;
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -32,9 +35,10 @@ const LinksContainer = styled.div`
   display: flex;
   flex-direction: row;
   min-height: 147px;
-  padding-left: 1rem;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
+  padding-left: 1rem;
 `;
 
 const S = {
