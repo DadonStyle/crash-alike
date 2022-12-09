@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 
 const StyledLink = styled(Link)`
@@ -31,6 +31,10 @@ const HeaderContainer = styled.div`
 const LinksContainer = styled.div`
   display: flex;
   flex-direction: row;
+  min-height: 147px;
+  padding-left: 1rem;
+  justify-content: center;
+  align-items: center;
 `;
 
 const S = {

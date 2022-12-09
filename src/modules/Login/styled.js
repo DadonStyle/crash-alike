@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { Form } from 'react-bootstrap';
 
 const Wrappper = styled.div`
