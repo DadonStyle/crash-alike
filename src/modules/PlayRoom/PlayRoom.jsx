@@ -8,7 +8,7 @@ import S from './styled';
 import userSVG from '../../assets/user.svg';
 import useTimer from '../../hooks/useTimer';
 import roomSelector from '../../redux/selectors/roomSelector';
-import connectionSelector from '../../redux/selectors/connectionSelector';
+import useWebSocket from '../../hooks/useWebSocket';
 
 const PlayRoom = () => {
   const dispatch = useDispatch();
@@ -39,37 +39,7 @@ const PlayRoom = () => {
   const [isTicking, setIsTicking] = useState(false);
   // round
 
-  // eslint-disable-next-line no-unused-vars
-  const [isOpen, setIsOpen] = useState(false);
-  const clientObj = useSelector(connectionSelector.clientObj);
-
-  useEffect(() => {
-    // eslint-disable-next-line no-undef
-    const socket = new WebSocket(
-      `ws://157.245.139.199:8080/bomb?token=${clientObj.ClientToken}`
-    );
-    // console.log('trying');
-    socket.onopen = () => {
-      // console.log('onopen', msg);
-      setIsOpen(true);
-    };
-    socket.onerror = (error) => {
-      console.log('onerror', error);
-      setIsOpen(false);
-    };
-
-    socket.onmessage = (msg) => {
-      console.log('onmessage', msg);
-      const data = JSON.parse(msg.data);
-      try {
-        console.log(data);
-      } catch (err) {
-        // whatever you wish to do with the err
-        console.log(err);
-      }
-      return () => socket.close();
-    };
-  }, [clientObj]);
+  const [socket] = useWebSocket();
 
   useEffect(() => {
     if (isLogin || isRegister) {
@@ -99,11 +69,19 @@ const PlayRoom = () => {
     setReadyList([...JoinedList, newUser]);
   };
 
-  const handleBet = useCallback(() => console.log('bet'), []);
+  const handleBet = useCallback(() => {
+    console.log('send bet');
+    socket.current.send(
+      JSON.stringify({ Command: 2 })
+    );
+  }, [socket]);
+
   const handleHit = useCallback(() => {
     setIsHit(true);
-    console.log('hit');
-  }, []);
+    socket.current.send(
+      JSON.stringify({ Command: 3 })
+    );
+  }, [socket]);
 
   return (
     <S.Wrappper>
