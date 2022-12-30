@@ -20,6 +20,7 @@ const Login = () => {
   const { register, handleSubmit } = useForm();
   const [passwordShown, setPasswordShown] = useState(false);
   const dispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars
   const id = 1; // hardcoded for now
 
   const sendLogin = async (formData) => {
@@ -30,7 +31,7 @@ const Login = () => {
       });
       dispatch(setClientObj(response.data));
       toast.success('you have been successfully logged in');
-      navigate(`/playRoom/:${id}`, { replace: true });
+      navigate('/rooms', { replace: true });
     } catch (err) {
       console.log('raw err', err.response.data);
       const errResponse = errorHandler(err.response.data);
