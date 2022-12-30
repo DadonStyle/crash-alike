@@ -1,20 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Bomb from '../../components/Bomb/Bomb';
-import { setIsLogin, setIsRegister } from '../../redux/actions/pageAction';
-import { setIsRoundOver } from '../../redux/actions/roomAction';
-import pageSelector from '../../redux/selectors/pageSelector';
+import Bomb from '../../../components/Bomb/Bomb';
+import { setIsRoundOver } from '../../../redux/actions/roomAction';
 import S from './styled';
-import userSVG from '../../assets/user.svg';
-import useTimer from '../../hooks/useTimer';
-import roomSelector from '../../redux/selectors/roomSelector';
-import useWebSocket from '../../hooks/useWebSocket';
+import userSVG from '../../../assets/user.svg';
+import useTimer from '../../../hooks/useTimer';
+import roomSelector from '../../../redux/selectors/roomSelector';
+import connectionSelector from '../../../redux/selectors/connectionSelector';
 
 const PlayRoom = () => {
   const dispatch = useDispatch();
-  const isLogin = useSelector(pageSelector.isLogin);
-  const isRegister = useSelector(pageSelector.isRegister);
   const isRoundOver = useSelector(roomSelector.isRoundOver);
+  const socket = useSelector(connectionSelector.socket);
 
   const startTime = 1000; // 10 sec
 
@@ -38,17 +35,6 @@ const PlayRoom = () => {
   // bomb timer
   const [isTicking, setIsTicking] = useState(false);
   // round
-
-  const [socket] = useWebSocket();
-
-  useEffect(() => {
-    if (isLogin || isRegister) {
-      dispatch(setIsLogin(false));
-      dispatch(setIsRegister(false));
-      // not sure if this gets here (need server to check)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     if (ReadyList.length >= 5 && status === 'not started') {

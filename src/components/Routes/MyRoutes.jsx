@@ -4,7 +4,7 @@ import Login from '../../modules/Login/Login';
 import Register from '../../modules/Register/Register';
 import Header from '../../modules/Header/Header';
 import Rooms from '../../modules/Rooms/Rooms';
-import PlayRoom from '../../modules/PlayRoom/PlayRoom';
+import PlayRoom from '../../modules/Rooms/PlayRoom/PlayRoom';
 
 const MyRoutes = () => (
   <Router>

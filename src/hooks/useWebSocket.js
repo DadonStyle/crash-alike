@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setMsgArr, setSocket } from '../redux/actions/connectionAction';
 import connectionSelector from '../redux/selectors/connectionSelector';
 
 const useWebSocket = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
   const clientObj = useSelector(connectionSelector.clientObj);
+  const msgArr = useSelector(connectionSelector.msgArr);
   const socket = useRef(null);
 
   useEffect(() => {
@@ -13,33 +14,30 @@ const useWebSocket = () => {
     socket.current = new WebSocket(
       `ws://157.245.139.199:8080/bomb?token=${clientObj.ClientToken}`
     );
+
     socket.current.onopen = () => {
-      setIsOpen(true);
+      setSocket(socket);
     };
     socket.current.onerror = (error) => {
       console.log('onerror', error);
-      setIsOpen(false);
     };
-
-    return () => socket.current.close();
-  }, [clientObj, setIsOpen]);
-
-  useEffect(() => {
+    socket.current.onclose = (error) => {
+      console.log('onclose', error);
+    };
     socket.current.onmessage = (msg) => {
       // console.log('onmessage', msg);
       const data = JSON.parse(msg.data);
       try {
+        dispatch(setMsgArr([...msgArr, data]));
         console.log(data);
       } catch (err) {
         // whatever you wish to do with the err
         console.log(err);
       }
     };
-  }, []);
 
-  return [
-    socket
-  ];
+    return () => socket.current.close();
+  }, [clientObj, dispatch, msgArr]);
 };
 
 export default useWebSocket;
