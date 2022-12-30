@@ -28,7 +28,7 @@ const useWebSocket = () => {
       // console.log('onmessage', msg);
       const data = JSON.parse(msg.data);
       try {
-        dispatch(setMsgArr([...msgArr, data]));
+        dispatch(setMsgArr([...msgArr, data])); // not working need to add data with previous array data
         console.log(data);
       } catch (err) {
         // whatever you wish to do with the err
