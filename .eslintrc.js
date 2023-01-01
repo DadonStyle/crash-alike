@@ -1,6 +1,19 @@
 module.exports = {
-  extends: ['plugin:react/recommended', 'airbnb'],
-  plugins: ['react', 'react-hooks'],
+  env: {
+    browser: true,
+    es2021: true,
+    jest: true
+  },
+  extends: ['airbnb', 'eslint:recommended', 'plugin:react/recommended'],
+  plugins: ['import', 'react', 'react-hooks'],
+  parser: 'babel-eslint',
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 12,
+    sourceType: 'module',
+  },
   rules: {
     'react-hooks/exhaustive-deps': 'error',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],

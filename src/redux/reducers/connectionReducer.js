@@ -1,7 +1,7 @@
-import { SET_CLIENT_OBJ, SET_SOCKET, SET_MSG_ARR } from '../actionTypes/connectionActionType';
+import { SET_CLIENT_OBJ, SET_SOCKET, ADD_MSG_ARR } from '../actionTypes/connectionActionType';
 
 const INITIAL_STATE = {
-  clientObj: null,
+  clientObj: {},
   socket: null,
   msgArr: [],
 };
@@ -19,10 +19,10 @@ export const connectionReducer = (state = INITIAL_STATE, action) => {
         ...state,
         socket: action.payload,
       };
-    case SET_MSG_ARR:
+    case ADD_MSG_ARR:
       return {
         ...state,
-        msgArr: action.payload,
+        msgArr: state.msgArr.concat(action.payload),
       };
     default:
       return state;

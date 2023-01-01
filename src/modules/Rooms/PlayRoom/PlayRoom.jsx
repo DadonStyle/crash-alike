@@ -12,6 +12,7 @@ const PlayRoom = () => {
   const dispatch = useDispatch();
   const isRoundOver = useSelector(roomSelector.isRoundOver);
   const socket = useSelector(connectionSelector.socket);
+  const msgArr = useSelector(connectionSelector.msgArr);
 
   const startTime = 1000; // 10 sec
 
@@ -27,8 +28,6 @@ const PlayRoom = () => {
   ] = useTimer(startTime, 10, true);
 
   // users
-  const [JoinedList, setJoinedList] = useState([]);
-  const [ReadyList, setReadyList] = useState([]);
   const [isHit, setIsHit] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [hitTime, setHitTime] = useState(0);
@@ -37,7 +36,7 @@ const PlayRoom = () => {
   // round
 
   useEffect(() => {
-    if (ReadyList.length >= 5 && status === 'not started') {
+    if (msgArr) {
       dispatch(setIsRoundOver(false));
       handleStart();
     }
@@ -47,13 +46,7 @@ const PlayRoom = () => {
       setIsTicking(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ReadyList.length, isTicking, miliSeconds, seconds]);
-
-  const MockUserCreator = (name) => {
-    const newUser = { icon: userSVG, name, id: Math.random() };
-    setJoinedList([...JoinedList, newUser]);
-    setReadyList([...JoinedList, newUser]);
-  };
+  }, [isTicking, miliSeconds, seconds]);
 
   const handleBet = useCallback(() => {
     console.log('send bet');
